@@ -6,10 +6,10 @@ class Program
     {
         // Generate a random number between 1 and 100
         Random randomGenerator = new Random();
-        int number = randomGenerator.Next(1, 101); // Random number is inclusive of 1 and 100
+        int number = randomGenerator.Next(1, 101); 
         Console.WriteLine("A magic number has been generated!");
 
-        int guess = 0; // Initialize the guess variable
+        int guess = 0; 
         do
         {
             Console.Write("What is your guess? ");
@@ -37,6 +37,6 @@ class Program
                 Console.WriteLine("You guessed it!");
             }
 
-        } while (guess != number); // Repeat until the correct guess
+        } while (guess != number); 
     }
 }
