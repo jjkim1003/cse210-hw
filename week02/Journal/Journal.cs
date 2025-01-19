@@ -24,15 +24,19 @@ public class Journal
     {
         using (StreamWriter writer = new StreamWriter(file))
         {
+            // Write a header row for the CSV file
+            writer.WriteLine("Date,Prompt,Entry");
+
             foreach (Entry entry in _entries)
             {
-                writer.WriteLine(entry._date);
-                writer.WriteLine(entry._promptText);
-                writer.WriteLine(entry._entryText);
-                writer.WriteLine("-----"); // Separator for entries
+                // Escape commas in user input to avoid breaking CSV format
+                string sanitizedPrompt = entry._promptText.Replace(",", " ");
+                string sanitizedEntry = entry._entryText.Replace(",", " ");
+
+                writer.WriteLine($"{entry._date},{sanitizedPrompt},{sanitizedEntry}");
             }
         }
-        Console.WriteLine("Journal saved successfully.");
+        Console.WriteLine("Journal saved successfully as a .csv file.");
     }
 
     public void LoadFromFile(string file)
@@ -47,24 +51,28 @@ public class Journal
 
         using (StreamReader reader = new StreamReader(file))
         {
+            // Skip the header row
+            string header = reader.ReadLine();
+
             while (!reader.EndOfStream)
             {
-                string date = reader.ReadLine();
-                string prompt = reader.ReadLine();
-                string entryText = reader.ReadLine();
-                string separator = reader.ReadLine(); // Read separator line (e.g., "-----")
+                string line = reader.ReadLine();
+                string[] parts = line.Split(',');
 
-                Entry entry = new Entry
+                if (parts.Length == 3)
                 {
-                    _date = date,
-                    _promptText = prompt,
-                    _entryText = entryText
-                };
+                    Entry entry = new Entry
+                    {
+                        _date = parts[0],
+                        _promptText = parts[1],
+                        _entryText = parts[2]
+                    };
 
-                _entries.Add(entry);
+                    _entries.Add(entry);
+                }
             }
         }
 
-        Console.WriteLine("Journal loaded successfully.");
+        Console.WriteLine("Journal loaded successfully from the .csv file.");
     }
 }

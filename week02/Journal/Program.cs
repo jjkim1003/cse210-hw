@@ -1,3 +1,5 @@
+//for exceeding requirement, I added the process of saving and loading to save as a .csv file that could be open in Excel.
+// Also, I added the current time when writing the journals. 
 using System;
 
 class Program
@@ -44,13 +46,13 @@ class Program
             }
             else if (choice == "3")
             {
-                Console.Write("Enter the filename to load: ");
+                Console.Write("Enter the filename to load (.csv): ");
                 string filename = Console.ReadLine();
                 journal.LoadFromFile(filename);
             }
             else if (choice == "4")
             {
-                Console.Write("Enter the filename to save: ");
+                Console.Write("Enter the filename to save (.csv): ");
                 string filename = Console.ReadLine();
                 journal.SaveToFile(filename);
             }
