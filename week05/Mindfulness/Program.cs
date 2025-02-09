@@ -12,7 +12,8 @@ class Program
             Console.WriteLine(" 1. Start breathing activity");
             Console.WriteLine(" 2. Start reflecting activity");
             Console.WriteLine(" 3. Start listing activity");
-            Console.WriteLine(" 4. Quit");
+            Console.WriteLine(" 4. Start gratitude activity");
+            Console.WriteLine(" 5. Quit");
             Console.Write("Select a choice from the menu: ");
             
             choice = Console.ReadLine();
@@ -34,6 +35,11 @@ class Program
             }
             else if (choice == "4")
             {
+                GratitudeActivity gratitudeActivity = new GratitudeActivity();
+                gratitudeActivity.Run();
+            }
+            else if (choice == "5")
+            {
                 Console.WriteLine("Goodbye!");
             }
             else
@@ -42,6 +48,6 @@ class Program
                 Thread.Sleep(2000);
             }
         }
-        while (choice != "4");
+        while (choice != "5");
     }
 }
